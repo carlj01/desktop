@@ -25,3 +25,7 @@
     - python3-pyparsing
     - ansible
     state: latest
+
+- name: Get updates
+  ansible.builtin.apt:
+    update_cache: true
