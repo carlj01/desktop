@@ -1,0 +1,20 @@
+---
+- name: Create and provision local desktop
+  hosts: localhost
+  gather_facts: false
+  become: yes
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+
+  pre_tasks:
+    - name: update repositories
+      ansible.builtin.apt:
+        update_cache: true
+      changed_when: false
+    
+  tasks: 
+    - ansible.builtin.include_tasks:
+        file: "{{ item }}"
+      with_items:
+        - tasks/packages.yml
+        - tasks/install_ansible.yml

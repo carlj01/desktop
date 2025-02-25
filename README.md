@@ -1,2 +1,2 @@
-# desktop
-ansible scripts for creating and maintaining LMDE desktop
+# ansible
+Ansible scripts for automating home proxmox configurations

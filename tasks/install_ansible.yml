@@ -1,0 +1,26 @@
+- name: Install useful scripts for adding and removing PPAs
+  ansible.builtin.apt:
+    name: software-properties-common
+    state: latest
+
+- name: add ansible repository from PPA
+  ansible.builtin.apt_repository:
+    repo: ppa:ansible/ansible
+    codename: jammy
+
+- name: Get updates
+  ansible.builtin.apt:
+    update_cache: true
+
+- name: Install Ansible
+  ansible.builtin.apt:
+    name: 
+    - python3-yaml 
+    - python3-resolvelib 
+    - python3-packaging 
+    - python3-jinja2 
+    - python3-markupsafe 
+    - python3-pyparsing
+    - ansible
+    state: latest
+
