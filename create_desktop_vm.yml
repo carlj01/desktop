@@ -1,0 +1,53 @@
+---
+- hosts: proxmox
+  become: true
+
+  vars:
+    proxmox_api_user: root@pam
+    proxmox_api_token_id: root-token
+    proxmox_api_token_secret: cb90b4cf-91e2-4bad-acf5-dcef59485704
+    proxmox_api_host: 192.168.50.101
+    proxmox_api_port: 8006
+    proxmox_vm_name: test2-LMDE
+    proxmox_vm_newid: 301
+    proxmox_vm_template: LMDE6-Template
+    proxmox_vm_node: pve
+    
+  tasks:
+  - name: Clone LMDE6-Template
+    community.general.proxmox_kvm:
+      node: pve
+      vmid: 9000 
+      clone: LMDE6-Template 
+      name: LMDE-Desktop-01
+      newid: 301
+      api_host: "{{ proxmox_api_host }}" 
+      api_port: "{{ proxmox_api_port }}"
+      api_user: "{{ proxmox_api_user }}"
+      api_token_id: "{{ proxmox_api_token_id }}"
+      api_token_secret: "{{ proxmox_api_token_secret }}"
+      storage: data
+      timeout: 600
+
+  - name: Delete net0
+    community.general.proxmox_nic:
+      api_host: "{{ proxmox_api_host }}" 
+      api_user: "{{ proxmox_api_user }}"
+      api_token_id: "{{ proxmox_api_token_id }}"
+      api_token_secret: "{{ proxmox_api_token_secret }}"
+      name: LMDE-Desktop-01
+      interface: net0
+      state: absent
+
+  - name: Create new net0 - set MAC address
+    community.general.proxmox_nic:
+      api_host: "{{ proxmox_api_host }}" 
+      api_user: "{{ proxmox_api_user }}"
+      api_token_id: "{{ proxmox_api_token_id }}"
+      api_token_secret: "{{ proxmox_api_token_secret }}"
+      name: LMDE-Desktop-01
+      interface: net0
+      bridge: vmbr0
+      mac: BC:24:11:B5:FE:54
+      firewall: true
+      state: present
