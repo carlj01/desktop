@@ -29,3 +29,8 @@
 - name: Get updates
   ansible.builtin.apt:
     update_cache: true
+
+- name: Install updates
+  ansible.builtin.apt:
+    name: "*"
+    state: latest
