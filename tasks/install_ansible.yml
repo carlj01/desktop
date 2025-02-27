@@ -15,6 +15,7 @@
 - name: Install Ansible
   ansible.builtin.apt:
     name: 
+    - git
     - python3-pip
     - python3-proxmoxer
     - python3-yaml 

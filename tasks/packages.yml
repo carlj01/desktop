@@ -1,7 +1,6 @@
 - name: Install apt packages
   ansible.builtin.apt:
     name: 
-    - git
     - qemu-guest-agent
     - openssh-server
     - neovim
