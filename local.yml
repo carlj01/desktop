@@ -19,3 +19,4 @@
         - tasks/users.yml
         - tasks/packages.yml
         - tasks/install_ansible.yml
+        - tasks/cron.yml
