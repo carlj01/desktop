@@ -1,3 +1,6 @@
+- name: set display size
+  command: "/usr/bin/xrandr -s 1920x1080"
+
 - name: Install python-psutil package
   apt: name=python3-psutil
 
