@@ -9,7 +9,7 @@
 
 - name: Set GNOME Wallpaper
   become_user: carl
-  dconf: key="/org/gnome/desktop/background/picture-uri" value="'file:///home/carl/.wallpaper.jpg'"
+  dconf: key="/org/cinnamon/desktop/background/picture-uri" value="'file:///home/carl/.wallpaper.jpg'"
 
 - name: Set GTK theme
   become_user: carl
