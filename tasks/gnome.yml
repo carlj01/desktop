@@ -1,5 +1,5 @@
 - name: Install python-psutil package
-  apt: name=python-psutil
+  apt: name=python3-psutil
 
 - name: Copy wallpaper file
   copy: src=files/crab_kite.jpg dest=/home/carl/.wallpaper.jpg owner=carl group=carl mode=600
