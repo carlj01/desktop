@@ -1,0 +1,50 @@
+- name: Unmount Samba Share on the Target Machine
+  hosts: all
+  become: yes
+
+  vars:
+    samba_share_path1: "//omv.local/homeshare/carl"  # Samba share path (server IP and share name)
+    mount_point1: "/mnt/remoteShare"  # Local directory where the share will be mounted
+    samba_share_path2: "//omv.local/homeshare/documents"  # Samba share path (server IP and share name)
+    mount_point2: "/mnt/remoteDocuments"  # Local directory where the share will be mounted
+    samba_share_path3: "//omv.local/homeshare/music"  # Samba share path (server IP and share name)
+    mount_point3: "/mnt/remoteMusic"  # Local directory where the share will be mounted
+    samba_share_path4: "//omv.local/homeshare/photos"  # Samba share path (server IP and share name)
+    mount_point4: "/mnt/remotePhotos"  # Local directory where the share will be mounted
+    samba_credentials: "/home/carl/.smbcredentials"
+    samba_user: "carl"  # Samba user name
+    samba_password: "CarlAccess0!"  # Samba user password
+    fstab_backup: "/etc/fstab.bak"  # Backup for fstab file
+
+  tasks:
+    - name: Unmount remoteShare
+      ansible.posix.mount:
+        path: /mnt/remoteShare
+        src: //omv.local/homeshare/carl
+        fstype: cifs
+        opts: "uid=carl,gid=users,credentials=/home/carl/.smbcredentials"
+        state: absent
+    
+    - name: Unmount remoteDocuments
+      ansible.posix.mount:
+        path: /mnt/remoteDocuments
+        src: //omv.local/homeshare/documents
+        fstype: cifs
+        opts: "uid=carl,gid=users,credentials=/home/carl/.smbcredentials"
+        state: absent
+    
+    - name: Unmount remoteMusic
+      ansible.posix.mount:
+        path: /mnt/remoteMusic
+        src: //omv.local/homeshare/music
+        fstype: cifs
+        opts: "uid=carl,gid=users,credentials=/home/carl/.smbcredentials"
+        state: absent
+    
+    - name: Unmount remotePhotos
+      ansible.posix.mount:
+        path: /mnt/remotePhotos
+        src: //omv.local/homeshare/photos
+        fstype: cifs
+        opts: "uid=carl,gid=users,credentials=/home/carl/.smbcredentials"
+        state: absent

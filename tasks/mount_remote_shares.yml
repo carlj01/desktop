@@ -1,0 +1,87 @@
+- name: Mount Samba Share on the Target Machine
+  vars:
+    samba_share_path1: "//truenas.local/CarlShare"  # Samba share path (server IP and share name)
+    mount_point1: "/mnt/CarlShare"  # Local directory where the share will be mounted
+
+    samba_share_path2: "//truenas.local/Family"  # Samba share path (server IP and share name)
+    mount_point2: "/mnt/FamilyShare"  # Local directory where the share will be mounted
+
+    samba_share_path3: "//truenas.local/Media/"  # Samba share path (server IP and share name)
+    mount_point3: "/mnt/MediaShare"  # Local directory where the share will be mounted
+
+    samba_credentials: "/home/carl/.smbcredentials"
+    samba_user: "carl"  # Samba user name
+    samba_password: "CarlAccess0!"  # Samba user password
+    fstab_backup: "/etc/fstab.bak"  # Backup for fstab file
+
+  tasks:
+    - name: Ensure cifs-utils is installed
+      apt:
+        name: cifs-utils
+        state: present
+      when: ansible_os_family == "Debian"
+
+    - name: Ensure samba-client is installed
+      apt:
+        name: samba-client
+        state: present
+      when: ansible_os_family == "Debian"
+
+    - name: Create CarlShare mount point directory
+      file:
+        path: "{{ mount_point1 }}"
+        state: directory
+        owner: carl
+        group: users
+        mode: '0755'
+
+    - name: Create FamilyShare mount point directory
+      file:
+        path: "{{ mount_point2 }}"
+        state: directory
+        owner: carl
+        group: users
+        mode: '0755'
+
+    - name: Create MediaShare mount point directory
+      file:
+        path: "{{ mount_point3 }}"
+        state: directory
+        owner: carl
+        group: users
+        mode: '0755'
+
+    - name: Backup the /etc/fstab file
+      copy:
+        src: /etc/fstab
+        dest: "{{ fstab_backup }}"
+        backup: yes
+
+    - name: Restart services
+      ansible.builtin.systemd_service:
+        daemon_reload: true
+
+    - name: Mount remoteShare
+      ansible.posix.mount:
+        path: /mnt/CarlShare
+        src: //truenas.local/CarlShare
+        fstype: cifs
+        opts: "uid=carl,gid=users,credentials=/home/carl/.smbcredentials"
+        state: mounted
+    
+    - name: Mount FamilyShare
+      ansible.posix.mount:
+        path: /mnt/FamilyShare
+        src: //truenas.local/Family
+        fstype: cifs
+        opts: "uid=carl,gid=users,credentials=/home/carl/.smbcredentials"
+        state: mounted
+    
+    - name: Mount MediaShare
+      ansible.posix.mount:
+        path: /mnt/MediaShare
+        src: //truenas.local/Media
+        fstype: cifs
+        opts: "uid=carl,gid=users,credentials=/home/carl/.smbcredentials"
+        state: mounted
+    
