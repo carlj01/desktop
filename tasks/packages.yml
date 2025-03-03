@@ -9,7 +9,7 @@
     state: latest
 
 - name: Install flatpak packages
-  ansible.builtin.flatpak:
+  community.general.flatpak:
     name: 
     - com.brave.Browser
     - org.freecad.FreeCAD
