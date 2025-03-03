@@ -19,6 +19,6 @@
         - tasks/users.yml
         - tasks/install_ansible.yml
         - tasks/packages.yml
-        - tasks/mount_remote_shares.yml
         - tasks/gnome.yml
         - tasks/cron.yml
+        - tasks/mount_remote_shares.yml
