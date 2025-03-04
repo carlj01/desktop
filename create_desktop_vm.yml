@@ -51,3 +51,14 @@
       mac: BC:24:11:B5:FE:54
       firewall: true
       state: present
+
+  - name: Start LMDE-Desktop-01
+    community.general.proxmox_kvm:
+      node: pve
+      vmid: 301 
+      name: LMDE-Desktop-01
+      api_host: "{{ proxmox_api_host }}" 
+      api_user: "{{ proxmox_api_user }}"
+      api_token_id: "{{ proxmox_api_token_id }}"
+      api_token_secret: "{{ proxmox_api_token_secret }}"
+      state: started

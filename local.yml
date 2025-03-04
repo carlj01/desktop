@@ -17,8 +17,8 @@
         file: "{{ item }}"
       with_items:
         - tasks/users.yml
-        - tasks/install_ansible.yml
+        - tasks/mount_remote_shares.yml
         - tasks/packages.yml
         - tasks/gnome.yml
+        - tasks/install_ansible.yml
         - tasks/cron.yml
-        - tasks/mount_remote_shares.yml

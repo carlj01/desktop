@@ -3,6 +3,8 @@
     name: 
     - qemu-guest-agent
     - openssh-server
+    - cifs-utils
+    - samba-client
     - neovim
     - chromium
     - deja-dup

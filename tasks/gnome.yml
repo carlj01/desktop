@@ -4,16 +4,13 @@
 - name: Install python-psutil package
   apt: name=python3-psutil
 
-- name: Install arc theme
-  apt: name=arc-theme    
-
 - name: Copy wallpaper file
   copy: src=files/crab_kite.jpg dest=/home/carl/.wallpaper.jpg owner=carl group=carl mode=600
 
 - name: Set GNOME Wallpaper
   become_user: carl
-  dconf: key="/org/cinnamon/desktop/background/picture-uri" value="'file:///home/carl/.wallpaper.jpg'"
+  community.general.dconf: key="/org/cinnamon/desktop/background/picture-uri" value="'file:///home/carl/.wallpaper.jpg'"
 
 - name: Set GTK theme
   become_user: carl
-  dconf: key="/org/cinnamon/theme/name" value="'CBlack'"
+  community.general.dconf: key="/org/cinnamon/theme/name" value="'CBlack'"
