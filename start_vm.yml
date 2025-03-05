@@ -1,0 +1,18 @@
+---
+- hosts: proxmox
+  become: true
+
+  tasks:
+    - name: Connect to VM
+      community.general.proxmox_kvm:
+        node: pve1
+        name: LMDE-Desktop-01
+        vmid: 129
+        api_user: ansible@pam
+        api_token_id: ansible
+        api_token_secret: c326709e-8a5c-4828-87b1-52f29189bc9b
+          #        api_user: ansible
+          #        api_token_id: "{{ api_token_id }}" 
+          #        api_token_secret: "{{ api_token_secret }}" 
+        api_host: 192.168.50.101 
+        state: started  
