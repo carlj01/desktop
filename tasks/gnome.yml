@@ -1,6 +1,6 @@
 - name: set display size
 #  command: "/usr/bin/xrandr -s 1920x1080"
-  command: "/usr/bin/xrandr --display :0.0 --output Virtual-1 --mode 1920x1080" 
+  command: "/usr/bin/xrandr -d :0 --output Virtual-1 --mode 1920x1080" 
 
 - name: Install python-psutil package
   apt: name=python3-psutil
