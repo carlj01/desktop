@@ -1,5 +1,6 @@
 - name: set display size
-  command: "/usr/bin/xrandr -s 1920x1080"
+#  command: "/usr/bin/xrandr -s 1920x1080"
+  command: "/usr/bin/xrandr --display :0.0 --output Virtual-1 --mode 1920x1080" 
 
 - name: Install python-psutil package
   apt: name=python3-psutil
@@ -8,7 +9,7 @@
   copy: src=files/crab_kite.jpg dest=/home/carl/.wallpaper.jpg owner=carl group=carl mode=600
 
 - name: Set GNOME Wallpaper
-  become_user: carl
+# become_user: carl
   community.general.dconf: key="/org/cinnamon/desktop/background/picture-uri" value="'file:///home/carl/.wallpaper.jpg'"
 
 - name: Set GTK theme
