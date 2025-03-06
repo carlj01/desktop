@@ -8,7 +8,7 @@
     proxmox_api_token_secret: cb90b4cf-91e2-4bad-acf5-dcef59485704
     proxmox_api_host: 192.168.50.101
     proxmox_api_port: 8006
-    proxmox_vm_name: test2-LMDE
+    proxmox_vm_name: LMDE-Desktop-01
     proxmox_vm_newid: 301
     proxmox_vm_template: LMDE6-Template
     proxmox_vm_node: pve
@@ -18,8 +18,8 @@
     community.general.proxmox_kvm:
       node: pve
       vmid: 9000 
-      clone: LMDE6-Template 
-      name: LMDE-Desktop-01
+      clone: "{{ proxmox_vm_template }}" 
+      name: "{{ proxmox_vm_name }}"
       newid: 301
       api_host: "{{ proxmox_api_host }}" 
       api_port: "{{ proxmox_api_port }}"
@@ -27,7 +27,7 @@
       api_token_id: "{{ proxmox_api_token_id }}"
       api_token_secret: "{{ proxmox_api_token_secret }}"
       storage: data
-      timeout: 600
+      timeout: 630
 
   - name: Delete net0
     community.general.proxmox_nic:
@@ -35,7 +35,7 @@
       api_user: "{{ proxmox_api_user }}"
       api_token_id: "{{ proxmox_api_token_id }}"
       api_token_secret: "{{ proxmox_api_token_secret }}"
-      name: LMDE-Desktop-01
+      name: "{{ proxmox_vm_name }}"
       interface: net0
       state: absent
 
@@ -45,7 +45,7 @@
       api_user: "{{ proxmox_api_user }}"
       api_token_id: "{{ proxmox_api_token_id }}"
       api_token_secret: "{{ proxmox_api_token_secret }}"
-      name: LMDE-Desktop-01
+      name: "{{ proxmox_vm_name }}"
       interface: net0
       bridge: vmbr0
       mac: BC:24:11:B5:FE:54
@@ -56,7 +56,7 @@
     community.general.proxmox_kvm:
       node: pve
       vmid: 301 
-      name: LMDE-Desktop-01
+      name: "{{ proxmox_vm_name }}"
       api_host: "{{ proxmox_api_host }}" 
       api_user: "{{ proxmox_api_user }}"
       api_token_id: "{{ proxmox_api_token_id }}"
