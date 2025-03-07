@@ -29,6 +29,10 @@
       storage: data
       timeout: 630
 
+  - name: Wait for VM to complete starting
+    ansible.builtin.pause:
+      seconds: 15
+
   - name: Delete net0
     community.general.proxmox_nic:
       api_host: "{{ proxmox_api_host }}" 

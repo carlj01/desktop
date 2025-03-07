@@ -1,8 +1,10 @@
-- name: set display size
+#- name: set display size
 #  command: "/usr/bin/xrandr -s 1920x1080"
-  command: "/usr/bin/xrandr -d :0 --output Virtual-1 --mode 1920x1080" 
-  environment:
-    XAUTHORITY: /home/carl/.Xauthority
+#  command: "/usr/bin/xrandr -d :0 --output Virtual-1 --mode 1920x1080" 
+#  environment:
+#    XAUTHORITY: /home/carl/.Xauthority
+- name: Copy cinnamon-monitors.xml - Set screen resolution 1920x1080
+  copy: src=files/cinnamon-monitors.xml dest=/home/carl/.config/cinnamon-monitors.xml owner=carl group=carl mode=644
 
 - name: Install python-psutil package
   apt: name=python3-psutil
