@@ -17,3 +17,8 @@
     - org.freecad.FreeCAD
     state: latest
 
+- name: Upgrade all flatpaks
+  ansible.builtin.command: flatpak update --noninteractive
+  register: flatpak_update_output
+  changed_when: "'app/' in flatpak_update_output.stdout"      
+
