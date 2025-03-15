@@ -15,5 +15,5 @@
     name: 
     - com.brave.Browser
     - org.freecad.FreeCAD
-    state: present
+    state: latest
 
